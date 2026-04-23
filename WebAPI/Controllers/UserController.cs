@@ -25,7 +25,7 @@ public class UserController : ControllerBase
     public async Task<IActionResult> UpdateProfile(Guid id, [FromBody] UpdateProfileCommand command)
     {
         command = new UpdateProfileCommand { UserId = id, DisplayName = command.DisplayName, AvatarUrl = command.AvatarUrl, Bio = command.Bio };
-        var result = await _mediator.Send(command); 
+        var result = await _mediator.Send(command);
         return result.IsSuccess ? Ok() : BadRequest(result.ErrorMessage);
     }
 
@@ -33,6 +33,12 @@ public class UserController : ControllerBase
     public async Task<IActionResult> GetProfile(Guid id)
     {
         var result = await _mediator.Send(new GetProfileQuery { UserId = id });
+        return result.IsSuccess ? Ok(result.Value) : NotFound(result.ErrorMessage);
+    }
+    [HttpGet("auth/{authUserId}")]
+    public async Task<IActionResult> GetByAuthUserId(Guid authUserId)
+    {
+        var result = await _mediator.Send(new GetProfileByAuthIdQuery { AuthUserId = authUserId });
         return result.IsSuccess ? Ok(result.Value) : NotFound(result.ErrorMessage);
     }
 }
