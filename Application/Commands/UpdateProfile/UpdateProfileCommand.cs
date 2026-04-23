@@ -2,7 +2,6 @@ using Eventide.UserService.Application.Common;
 using MediatR;
 
 namespace Eventide.UserService.Application.Commands.UpdateProfile;
-
 public class UpdateProfileCommand : IRequest<Result>
 {
     public Guid UserId { get; init; }

@@ -18,6 +18,9 @@ public class UserDbContext : DbContext
             builder.HasIndex(p => p.Username).IsUnique();
             builder.HasIndex(p => p.AuthUserId).IsUnique();
             builder.Property(p => p.DisplayName).IsRequired().HasMaxLength(50);
+            
+            builder.Ignore(p => p.GameRanks);
+            builder.Ignore(p => p.TeamIds);
         });
     }
 }

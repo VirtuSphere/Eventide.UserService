@@ -24,7 +24,8 @@ public class UserController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateProfile(Guid id, [FromBody] UpdateProfileCommand command)
     {
-        var result = await _mediator.Send(command with { UserId = id });
+        command = new UpdateProfileCommand { UserId = id, DisplayName = command.DisplayName, AvatarUrl = command.AvatarUrl, Bio = command.Bio };
+        var result = await _mediator.Send(command); 
         return result.IsSuccess ? Ok() : BadRequest(result.ErrorMessage);
     }
 

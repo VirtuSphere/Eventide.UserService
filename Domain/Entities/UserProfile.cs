@@ -1,6 +1,4 @@
-using Eventide.UserService.Domain.Enums;
 using Eventide.UserService.Domain.Exceptions;
-using Eventide.UserService.Domain.ValueObjects;
 
 namespace Eventide.UserService.Domain.Entities;
 
